@@ -1,8 +1,5 @@
 package br.com.sisdb.vendas.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sisdb.vendas.domains.Categoria;
 import br.com.sisdb.vendas.services.CategoriaService;
+import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
 @RequestMapping("/categorias")
@@ -22,7 +20,7 @@ public class CategoriResource {
 	
 	
 	@GetMapping("{id}")
-	public ResponseEntity<?> find(@PathVariable Long id ) {
+	public ResponseEntity<?> find(@PathVariable Long id ) throws ObjectNotFoundException {
 		
 		Categoria obj = service.buscar(id);
 		

@@ -1,4 +1,4 @@
-package br.com.sisdb.vendas.domain;
+package br.com.sisdb.vendas.domains;
 
 import java.io.Serializable;
 

@@ -3,28 +3,31 @@ package br.com.sisdb.vendas.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sisdb.vendas.domain.Categoria;
+import br.com.sisdb.vendas.domains.Categoria;
+import br.com.sisdb.vendas.services.CategoriaService;
 
 @RestController
 @RequestMapping("/categorias")
 public class CategoriResource {
 
+	@Autowired
+	private CategoriaService service;
 	
-	@GetMapping
-	public List<Categoria> listar() {
+	
+	@GetMapping("{id}")
+	public ResponseEntity<?> find(@PathVariable Long id ) {
 		
-		Categoria c1 = new Categoria(1L, "informatica" );
-		Categoria c2 = new Categoria(2L, "Lazer");
+		Categoria obj = service.buscar(id);
 		
-		List<Categoria> list = new ArrayList<>();
 		
-		list.add(c1);
-		list.add(c2);
-		return list;
+		return ResponseEntity.ok().body(obj);
 	}
 	
 }

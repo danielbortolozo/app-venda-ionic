@@ -7,24 +7,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sisdb.vendas.domains.Categoria;
-import br.com.sisdb.vendas.services.CategoriaService;
+import br.com.sisdb.vendas.domains.Cliente;
+import br.com.sisdb.vendas.services.ClienteService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @RestController
-@RequestMapping("/categorias")
-public class CategoriResource {
+@RequestMapping("/clientes")
+public class ClienteResource {
 
 	@Autowired
-	private CategoriaService service;
+	private ClienteService service;
 	
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> find(@PathVariable Long id ) throws ObjectNotFoundException {
 		
-		Categoria obj = service.buscar(id);
-		
-		
+		Cliente obj = service.buscar(id);		
 		return ResponseEntity.ok().body(obj);
 	}
 	

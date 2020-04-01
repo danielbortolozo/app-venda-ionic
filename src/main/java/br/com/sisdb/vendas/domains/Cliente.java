@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.sisdb.vendas.domains.enums.TipoCliente;
 
 @Entity
@@ -34,8 +36,9 @@ public class Cliente implements Serializable{
 	
 	private Integer tipoCli;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
-	private List<Endereco> endercos = new ArrayList<>();
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name = "telefone")
@@ -94,12 +97,12 @@ public class Cliente implements Serializable{
 		this.tipoCli = tipoCli.getCod();
 	}
 
-	public List<Endereco> getEndercos() {
-		return endercos;
+	public List<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndercos(List<Endereco> endercos) {
-		this.endercos = endercos;
+	public void setEnderecos(List<Endereco> endercos) {
+		this.enderecos = endercos;
 	}
 
 	public Set<String> getTelefones() {

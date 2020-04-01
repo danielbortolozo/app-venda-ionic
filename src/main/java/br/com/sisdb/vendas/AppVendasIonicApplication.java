@@ -87,7 +87,7 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 		Endereco end1 = new Endereco(null, "R. Flores", "123", "Apt 12", "Jardins", "15600.900", cli1, cid1);
 		Endereco end2 = new Endereco(null, "R. Sao Domigues", "1900", "casa", "Jardins", "19600.900", cli1, cid2);
 		
-		cli1.getEndercos().addAll(Arrays.asList(end1, end2));	
+		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));	
 		
 		
 		cliRepos.saveAll(Arrays.asList(cli1));

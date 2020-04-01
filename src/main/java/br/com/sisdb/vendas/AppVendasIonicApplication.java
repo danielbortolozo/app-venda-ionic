@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.sisdb.vendas.domains.Categoria;
 import br.com.sisdb.vendas.domains.Cidade;
+import br.com.sisdb.vendas.domains.Cliente;
+import br.com.sisdb.vendas.domains.Endereco;
 import br.com.sisdb.vendas.domains.Estado;
 import br.com.sisdb.vendas.domains.Produto;
+import br.com.sisdb.vendas.domains.enums.TipoCliente;
 import br.com.sisdb.vendas.repositories.CategoriaRepository;
 import br.com.sisdb.vendas.repositories.CidadeRepository;
+import br.com.sisdb.vendas.repositories.ClienteRepository;
+import br.com.sisdb.vendas.repositories.EnderecoRepository;
 import br.com.sisdb.vendas.repositories.EstadoRepository;
 import br.com.sisdb.vendas.repositories.ProdutoRepository;
 
@@ -30,6 +35,13 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 	
 	@Autowired
 	private EstadoRepository estadoRepos;
+	
+	@Autowired
+	private ClienteRepository cliRepos;
+	
+	@Autowired
+	private EnderecoRepository endRepos;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AppVendasIonicApplication.class, args);
@@ -68,6 +80,19 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 		estadoRepos.saveAll(Arrays.asList(est1, est2));
 		
 		cidadeRepos.saveAll(Arrays.asList(cid1, cid2, cid3));
+		
+		Cliente cli1 = new Cliente(null, "Maria silva", "danielborto@fef", "123123123-09", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("17-997841731", "17 99721 5020"));
+		
+		Endereco end1 = new Endereco(null, "R. Flores", "123", "Apt 12", "Jardins", "15600.900", cli1, cid1);
+		Endereco end2 = new Endereco(null, "R. Sao Domigues", "1900", "casa", "Jardins", "19600.900", cli1, cid2);
+		
+		cli1.getEndercos().addAll(Arrays.asList(end1, end2));	
+		
+		
+		cliRepos.saveAll(Arrays.asList(cli1));
+		
+		endRepos.saveAll(Arrays.asList(end1, end2));
 		
 	}
 

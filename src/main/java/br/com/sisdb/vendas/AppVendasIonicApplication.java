@@ -13,6 +13,7 @@ import br.com.sisdb.vendas.domains.Cidade;
 import br.com.sisdb.vendas.domains.Cliente;
 import br.com.sisdb.vendas.domains.Endereco;
 import br.com.sisdb.vendas.domains.Estado;
+import br.com.sisdb.vendas.domains.ItemPedido;
 import br.com.sisdb.vendas.domains.Pagamento;
 import br.com.sisdb.vendas.domains.PagamentoBoleto;
 import br.com.sisdb.vendas.domains.PagamentoCartao;
@@ -25,6 +26,7 @@ import br.com.sisdb.vendas.repositories.CidadeRepository;
 import br.com.sisdb.vendas.repositories.ClienteRepository;
 import br.com.sisdb.vendas.repositories.EnderecoRepository;
 import br.com.sisdb.vendas.repositories.EstadoRepository;
+import br.com.sisdb.vendas.repositories.ItemPedidoRepository;
 import br.com.sisdb.vendas.repositories.PagamentoRepository;
 import br.com.sisdb.vendas.repositories.PedidoRepository;
 import br.com.sisdb.vendas.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagRepos;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedRepos;
 	
 	
 	public static void main(String[] args) {
@@ -123,7 +128,19 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 		pedRepos.saveAll(Arrays.asList(ped1, ped2));
 		pagRepos.saveAll(Arrays.asList(pagt1, pagt2));
 		
-			
-		}
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1.00, 2000.00);	
+		ItemPedido ip2 = new ItemPedido(ped2, p3, 0.00, 10.00, 2500.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 0.00, 5.00, 500.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1));
+		ped2.getItens().addAll(Arrays.asList(ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+	    itemPedRepos.saveAll(Arrays.asList(ip1,ip2,ip3));	
+	}
 
 }

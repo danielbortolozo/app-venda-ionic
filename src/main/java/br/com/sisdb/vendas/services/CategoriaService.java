@@ -2,6 +2,8 @@ package br.com.sisdb.vendas.services;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.sisdb.vendas.domains.Categoria;
 import br.com.sisdb.vendas.repositories.CategoriaRepository;
+
 import br.com.sisdb.vendas.services.exception.DataIntegrityException;
 import br.com.sisdb.vendas.services.exception.ObjctNotFoundException;
 
@@ -44,6 +47,11 @@ public class CategoriaService {
 			throw new DataIntegrityException("Está categoria está associada a um produto. Error: "
 		              +e.getMessage());
 		}
+	}
+
+	public List<Categoria> findAll() {
+		
+		return repository.findAll();
 	}
 	
 	

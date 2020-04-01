@@ -20,9 +20,9 @@ public class ClienteResource {
 	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> find(@PathVariable Long id ) throws ObjectNotFoundException {
+	public ResponseEntity<Cliente> find(@PathVariable Long id ) throws ObjectNotFoundException {
 		
-		Cliente obj = service.buscar(id);		
+		Cliente obj = service.find(id);		
 		return ResponseEntity.ok().body(obj);
 	}
 	

@@ -19,12 +19,10 @@ public class CategoriaResource {
 	private CategoriaService service;
 	
 	
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public ResponseEntity<?> find(@PathVariable Long id ) throws ObjectNotFoundException {
 		
-		Categoria obj = service.buscar(id);
-		
-		
+		Categoria obj = service.buscar(id);		
 		return ResponseEntity.ok().body(obj);
 	}
 	

@@ -1,5 +1,6 @@
 package br.com.sisdb.vendas;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,20 @@ import br.com.sisdb.vendas.domains.Cidade;
 import br.com.sisdb.vendas.domains.Cliente;
 import br.com.sisdb.vendas.domains.Endereco;
 import br.com.sisdb.vendas.domains.Estado;
+import br.com.sisdb.vendas.domains.Pagamento;
+import br.com.sisdb.vendas.domains.PagamentoBoleto;
+import br.com.sisdb.vendas.domains.PagamentoCartao;
+import br.com.sisdb.vendas.domains.Pedido;
 import br.com.sisdb.vendas.domains.Produto;
+import br.com.sisdb.vendas.domains.enums.EstadoPagamento;
 import br.com.sisdb.vendas.domains.enums.TipoCliente;
 import br.com.sisdb.vendas.repositories.CategoriaRepository;
 import br.com.sisdb.vendas.repositories.CidadeRepository;
 import br.com.sisdb.vendas.repositories.ClienteRepository;
 import br.com.sisdb.vendas.repositories.EnderecoRepository;
 import br.com.sisdb.vendas.repositories.EstadoRepository;
+import br.com.sisdb.vendas.repositories.PagamentoRepository;
+import br.com.sisdb.vendas.repositories.PedidoRepository;
 import br.com.sisdb.vendas.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -41,6 +49,12 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository endRepos;
+	
+	@Autowired
+	private PedidoRepository pedRepos;
+	
+	@Autowired
+	private PagamentoRepository pagRepos;
 	
 	
 	public static void main(String[] args) {
@@ -90,10 +104,26 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));	
 		
 		
-		cliRepos.saveAll(Arrays.asList(cli1));
-		
+		cliRepos.saveAll(Arrays.asList(cli1));		
 		endRepos.saveAll(Arrays.asList(end1, end2));
 		
-	}
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("31/03/2020 10:32"), cli1, end1 );
+		Pedido ped2 = new Pedido(null, sdf.parse("01/04/2020 01:23"), cli1, end1);
+		
+		Pagamento pagt1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 5);
+		ped1.setPagamento(pagt1);
+		
+		Pagamento pagt2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("10/04/2020 00:00"), null);
+		ped2.setPagamento(pagt2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		pedRepos.saveAll(Arrays.asList(ped1, ped2));
+		pagRepos.saveAll(Arrays.asList(pagt1, pagt2));
+		
+			
+		}
 
 }

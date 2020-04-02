@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.sisdb.vendas.domains.Categoria;
+import br.com.sisdb.vendas.dto.CategoriaDTO;
 import br.com.sisdb.vendas.repositories.CategoriaRepository;
 import br.com.sisdb.vendas.services.exception.DataIntegrityException;
 import br.com.sisdb.vendas.services.exception.ObjctNotFoundException;
@@ -63,7 +64,9 @@ public class CategoriaService {
 	}
 	
 	
-	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(), objDTO.getNome());
+	}
 	
 	
 	

@@ -2,6 +2,10 @@ package br.com.sisdb.vendas.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.sisdb.vendas.domains.Categoria;
 
 public class CategoriaDTO implements Serializable{
@@ -9,6 +13,9 @@ public class CategoriaDTO implements Serializable{
     
 	private static final long serialVersionUID = 1L;
 	private Long id;	
+	
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 40, message = "O nome tem que ser de 5 a 40 caracteres.")
 	private String nome;
 	
 	public CategoriaDTO() {

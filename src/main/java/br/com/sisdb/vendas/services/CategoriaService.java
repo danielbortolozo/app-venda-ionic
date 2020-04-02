@@ -2,17 +2,18 @@ package br.com.sisdb.vendas.services;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.sisdb.vendas.domains.Categoria;
 import br.com.sisdb.vendas.repositories.CategoriaRepository;
-
 import br.com.sisdb.vendas.services.exception.DataIntegrityException;
 import br.com.sisdb.vendas.services.exception.ObjctNotFoundException;
 
@@ -53,6 +54,22 @@ public class CategoriaService {
 		
 		return repository.findAll();
 	}
+	
+	public Page<Categoria> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPages, 
+				Direction.valueOf(direction), orderBy);
+		
+		return repository.findAll(pageRequest);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

@@ -70,6 +70,11 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		Categoria c1 = new Categoria(null, "Informática");
 		Categoria c2 = new Categoria(null, "escritório");
+		Categoria c3 = new Categoria(null, "Cama e banho");
+		Categoria c4 = new Categoria(null, "Cozinha");
+		Categoria c5 = new Categoria(null, "Contrucao");
+		Categoria c6 = new Categoria(null, "Jardinagem");
+		Categoria c7 = new Categoria(null, "Perfumaria");
 		
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impresora", 420.00);
@@ -82,7 +87,7 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 		p2.getCategorias().addAll(Arrays.asList(c1, c2));
 		p3.getCategorias().addAll(Arrays.asList(c1));
 		
-		catRepos.saveAll(Arrays.asList(c1,c2));
+		catRepos.saveAll(Arrays.asList(c1,c2, c3, c4, c5, c6, c7));
 		prodRepos.saveAll(Arrays.asList(p1,p2,p3));
 		
 		Estado est1 = new Estado(null, "Minas Gerais");

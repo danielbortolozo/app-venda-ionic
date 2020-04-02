@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.sisdb.vendas.domains.Cliente;
 import br.com.sisdb.vendas.dto.ClienteDTO;
+import br.com.sisdb.vendas.dto.ClienteNewDTO;
 import br.com.sisdb.vendas.services.ClienteService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -31,6 +32,7 @@ public class ClienteResource {
 
 	@Autowired
 	private ClienteService service;
+	
 	
 	
 	@GetMapping("/{id}")
@@ -58,11 +60,12 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	
-
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {		
+	
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {		
 		Cliente obj = service.fromDTO(objDto);
+		
+		System.out.println("Cliente resource :"+ obj.getNome()+"," + obj.getCpfCnpj()+", Tel: "+obj.getTelefones().size() );
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

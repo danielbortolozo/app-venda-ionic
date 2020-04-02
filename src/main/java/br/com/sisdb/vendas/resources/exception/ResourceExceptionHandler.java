@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.sisdb.vendas.services.exception.DataIntegrityException;
+import br.com.sisdb.vendas.services.exception.HttpMessageNotReadableException;
 import br.com.sisdb.vendas.services.exception.ObjctNotFoundException;
 
 @ControllerAdvice
@@ -23,6 +24,12 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 	}
 	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<StandardError> messageNotReadab(HttpMessageNotReadableException e, HttpServletRequest request){
+		
+		StandardError error = new  StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
 	
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request){

@@ -149,15 +149,15 @@ public class AppVendasIonicApplication  implements CommandLineRunner{
 		Pedido ped2 = new Pedido(null, sdf.parse("01/04/2020 01:23"), cli1, end1);
 		
 		Pagamento pagt1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 5);
-		ped1.setPagamento(pagt1);
+	//	ped1.setPagamento(pagt1);
 		
 		Pagamento pagt2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("10/04/2020 00:00"), null);
-		ped2.setPagamento(pagt2);
+	//	ped2.setPagamento(pagt2);
 		
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		pedRepos.saveAll(Arrays.asList(ped1, ped2));
-		pagRepos.saveAll(Arrays.asList(pagt1, pagt2));
+		//pagRepos.saveAll(Arrays.asList(pagt1, pagt2));
 		
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1.00, 2000.00);	
 		ItemPedido ip2 = new ItemPedido(ped2, p3, 0.00, 10.00, 2500.00);

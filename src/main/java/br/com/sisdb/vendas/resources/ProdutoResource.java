@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sisdb.vendas.domains.Produto;
-import br.com.sisdb.vendas.domains.Produto;
 import br.com.sisdb.vendas.dto.ProdutoDTO;
 import br.com.sisdb.vendas.resources.utils.URL;
 import br.com.sisdb.vendas.services.ProdutoService;

@@ -85,7 +85,7 @@ public class Pedido implements Serializable {
 	}
 
 	public Pagamento getPagamento() {
-		return pagamento;
+	return pagamento;
 	}
 
 	public void setPagamento(Pagamento pagamento) {

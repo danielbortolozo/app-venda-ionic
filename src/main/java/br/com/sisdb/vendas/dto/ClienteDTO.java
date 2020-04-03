@@ -6,7 +6,9 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.sisdb.vendas.domains.Cliente;
+import br.com.sisdb.vendas.services.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO {
 	
 	private Long id;

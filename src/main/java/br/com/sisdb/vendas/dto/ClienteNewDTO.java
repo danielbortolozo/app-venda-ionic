@@ -7,9 +7,11 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 import br.com.sisdb.vendas.services.validation.ClienteInsert;
+import br.com.sisdb.vendas.services.validation.ClienteUpdate;
 
 
 @ClienteInsert
+
 public class ClienteNewDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

@@ -65,9 +65,7 @@ public class ClienteResource {
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {		
 		Cliente obj = service.fromDTO(objDto);
 		
-		System.out.println("Cliente resource :"+ obj.getNome()+"," + obj.getCpfCnpj()+", Tel: "+obj.getTelefones().size() );
 		obj = service.insert(obj);
-		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				  .path("/{id}").buildAndExpand(obj.getId()).toUri();		
 		return ResponseEntity.created(uri).build();		

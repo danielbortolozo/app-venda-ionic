@@ -43,8 +43,9 @@ public class ClienteService {
 	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
-		 
+		
 		obj = repository.save(obj);
+		
 		endRepository.saveAll(obj.getEnderecos());
 		
 	   return obj;
@@ -99,13 +100,14 @@ public class ClienteService {
 		
 		cli.getTelefones().add(objDTO.getTelefone1());
 		
-		System.out.println("telefone1 :"+ objDTO.getTelefone1());
+		
 		if (objDTO.getTelefone2() !=  null) {
 			cli.getTelefones().add(objDTO.getTelefone2());
 		}
 		if (objDTO.getTelefone3() !=  null) {
 			cli.getTelefones().add(objDTO.getTelefone3());
 		}
+		
 		return cli;
 	}
 	

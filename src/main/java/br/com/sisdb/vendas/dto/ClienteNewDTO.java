@@ -2,21 +2,39 @@ package br.com.sisdb.vendas.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+import br.com.sisdb.vendas.services.validation.ClienteInsert;
+
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+
+	@NotEmpty(message = "Preenchimento obrigatório")
+	@Length(min = 5, max = 40, message = "O nome tem que ser de 5 a 40 caracteres.")
     private String nome;	
+	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String cpfCnpj;	
+	
+	@NotEmpty(message = "Preenchimento obrigatório.")
+	@Email(message = "Email inválido.")
 	private String email;	
 	private Integer tipoCli;
 	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String logradouro;	
 	private String numero;
 	private String complemento;
 	private String bairro;
 	private String cep;
 	
+	@NotEmpty(message = "Preenchimento obrigatório.")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
@@ -30,7 +48,7 @@ public class ClienteNewDTO implements Serializable{
 	public ClienteNewDTO(String nome, String cpfCnpj, String email, Integer tipoCli, String logradouro, String numero,
 			String complemento, String bairro, String cep, String telefone1, String telefone2, String telefone3,
 			Long cidadeId) {
-		super();
+		
 		this.nome = nome;
 		this.cpfCnpj = cpfCnpj;
 		this.email = email;

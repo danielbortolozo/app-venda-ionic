@@ -8,6 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.sisdb.vendas.domains.Cliente;
 import br.com.sisdb.vendas.domains.enums.TipoCliente;
 import br.com.sisdb.vendas.dto.ClienteNewDTO;
 import br.com.sisdb.vendas.repositories.ClienteRepository;
@@ -16,10 +17,9 @@ import br.com.sisdb.vendas.services.validation.util.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 	
-	
 	@Autowired
-	private  ClienteRepository repo;
-	
+	private ClienteRepository repo;
+		
 	@Override	
 	public void initialize(ClienteInsert ann) {
 	}
@@ -36,13 +36,17 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 			list.add(new FieldMessage("cpfCnpj", "CNPJ inválido"));
 		}
 		
+		Cliente aux = repo.findByEmail(objDto.getEmail());
+		if (aux != null) {
+			list.add(new FieldMessage("email", "Email já existente"));
+		}
+		
+		
 	   for (FieldMessage e : list) {
 	      context.disableDefaultConstraintViolation();
 	      context.buildConstraintViolationWithTemplate(e.getMessage())
 	      .addPropertyNode(e.getFieldName()).addConstraintViolation();
-	   }
-	   
-	   
+	   }	   
 	   return list.isEmpty();
 	}
 

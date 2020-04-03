@@ -12,12 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import br.com.sisdb.vendas.domains.Cliente;
-import br.com.sisdb.vendas.domains.enums.TipoCliente;
 import br.com.sisdb.vendas.dto.ClienteDTO;
-import br.com.sisdb.vendas.dto.ClienteNewDTO;
 import br.com.sisdb.vendas.repositories.ClienteRepository;
 import br.com.sisdb.vendas.resources.exception.FieldMessage;
-import br.com.sisdb.vendas.services.validation.util.BR;
 
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
 	

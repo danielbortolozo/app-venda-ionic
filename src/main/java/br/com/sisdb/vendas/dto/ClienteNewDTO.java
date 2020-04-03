@@ -6,8 +6,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+
 import br.com.sisdb.vendas.services.validation.ClienteInsert;
-import br.com.sisdb.vendas.services.validation.ClienteUpdate;
 
 
 @ClienteInsert

@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sisdb.vendas.domains.ItemPedido;
 import br.com.sisdb.vendas.domains.PagamentoBoleto;
@@ -29,7 +30,7 @@ public class PedidoService {
 	private PagamentoRepository pagamentRepository;
 	
 	@Autowired
-	private ProdutoRepository produtoRepository; 
+	private ProdutoService produtoService; 
 	
 	@Autowired 
 	private BoletoService boletoService;
@@ -37,15 +38,20 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedRepository;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
 	public Pedido find(Long id) {
 		Optional<Pedido> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjctNotFoundException(
 				"Pedido não encontrado Id: "+id + ", Tipos: "+ Pedido.class.getName()));
 	}
 
+	@Transactional
 	public Pedido insert(Pedido obj) {
         obj.setId(null);
         obj.setInstante(new Date());
+        obj.setCliente(clienteService.find(obj.getCliente().getId()));
         obj.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
         obj.getPagamento().setPedido(obj);
         
@@ -56,18 +62,19 @@ public class PedidoService {
         	boletoService.preencherPagamentoBoleto(pagto, obj.getInstante());
         }
        
-        obj = repository.save(obj);  
-        
+        obj = repository.save(obj);         
     
         
         pagamentRepository.save(obj.getPagamento());
         
         for (ItemPedido ip : obj.getItens()) {
         	ip.setDesconto(2.00);
-        	ip.setPreco(produtoRepository.getOne(obj.getId()).getPreco());
+        	ip.setProduto(produtoService.find(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPreco());
         	ip.setPedido(obj);
         }
 		itemPedRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		return repository.save(obj);
 	}
 	

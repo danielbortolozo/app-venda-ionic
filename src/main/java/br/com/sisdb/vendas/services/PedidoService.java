@@ -78,7 +78,7 @@ public class PedidoService {
         	ip.setPedido(obj);
         }
 		itemPedRepository.saveAll(obj.getItens());
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return repository.save(obj);
 	}
 	

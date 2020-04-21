@@ -9,7 +9,7 @@ import br.com.sisdb.vendas.domains.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	
-	//@Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	Cliente findByEmail(String email);
 	
 	

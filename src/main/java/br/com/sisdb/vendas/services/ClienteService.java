@@ -17,11 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.sisdb.vendas.domains.Cidade;
 import br.com.sisdb.vendas.domains.Cliente;
 import br.com.sisdb.vendas.domains.Endereco;
+import br.com.sisdb.vendas.domains.enums.Perfil;
 import br.com.sisdb.vendas.domains.enums.TipoCliente;
 import br.com.sisdb.vendas.dto.ClienteDTO;
 import br.com.sisdb.vendas.dto.ClienteNewDTO;
 import br.com.sisdb.vendas.repositories.ClienteRepository;
 import br.com.sisdb.vendas.repositories.EnderecoRepository;
+import br.com.sisdb.vendas.security.UserSS;
+import br.com.sisdb.vendas.services.exception.AuthorizationException;
 import br.com.sisdb.vendas.services.exception.DataIntegrityException;
 import br.com.sisdb.vendas.services.exception.ObjctNotFoundException;
 
@@ -39,6 +42,13 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 	
 	public Cliente find(Long id) {
+		
+		UserSS user = UserService.authenticated();
+		
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+		
 		Optional<Cliente> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjctNotFoundException(
 				"Cliente não encontrado Id: "+id + ", Tipos: "+ Cliente.class.getName()));

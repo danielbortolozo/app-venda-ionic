@@ -43,6 +43,14 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}	
 
+	@GetMapping("/email")
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email) {
+		System.out.println("cheguein no endpoint email: "+email);
+		Cliente obj = service.findByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	
 	@GetMapping()
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<List<ClienteDTO>> findAll()  {		

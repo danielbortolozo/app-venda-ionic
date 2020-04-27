@@ -32,6 +32,7 @@ import br.com.sisdb.vendas.services.exception.AuthorizationException;
 import br.com.sisdb.vendas.services.exception.DataIntegrityException;
 import br.com.sisdb.vendas.services.exception.ObjctNotFoundException;
 
+
 @Service
 public class ClienteService {
 
@@ -106,6 +107,23 @@ public class ClienteService {
 		return repository.findAll();
 	}
 	
+	public Cliente findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		System.out.println("Verificar email User: "+user.getUsername());
+		System.out.println("Verificar email User: "+email);
+		
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso Negado");
+		}
+		Cliente obj = repository.findByEmail(email);
+		if (obj == null) {
+			throw new ObjctNotFoundException("Objeto não encontrado! Id: "+ user.getId()
+			+ ", Tipo: "+Cliente.class.getName());
+		}
+		return obj;
+	}
+	
+	
 	public Page<Cliente> findPage(Integer page, Integer linesPerPages, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPages, 
 				Direction.valueOf(direction), orderBy);
@@ -155,6 +173,7 @@ public class ClienteService {
     	
     	return s3service.uploadFile(imgService.getInputStream(jpgImage, "jpg"), fileName, "image");    		 	
     }
+
 	
 	
 }

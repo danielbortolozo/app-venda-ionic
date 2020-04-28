@@ -28,7 +28,6 @@ import br.com.sisdb.vendas.repositories.ClienteRepository;
 import br.com.sisdb.vendas.repositories.EnderecoRepository;
 import br.com.sisdb.vendas.repositories.EstadoRepository;
 import br.com.sisdb.vendas.repositories.ItemPedidoRepository;
-import br.com.sisdb.vendas.repositories.PagamentoRepository;
 import br.com.sisdb.vendas.repositories.PedidoRepository;
 import br.com.sisdb.vendas.repositories.ProdutoRepository;
 
@@ -62,8 +61,7 @@ public class DBService {
 	@Autowired
 	private PedidoRepository pedRepos;
 	
-	@Autowired
-	private PagamentoRepository pagRepos;
+
 	
 	@Autowired
 	private ItemPedidoRepository itemPedRepos;
@@ -158,9 +156,11 @@ public class DBService {
 		Pedido ped1 = new Pedido(null, sdf.parse("31/03/2020 10:32"), cli1, end1 );
 		Pedido ped2 = new Pedido(null, sdf.parse("01/04/2020 01:23"), cli1, end1);
 		
+		@SuppressWarnings("unused")
 		Pagamento pagt1 = new PagamentoCartao(null, EstadoPagamento.QUITADO, ped1, 5);
 	//	ped1.setPagamento(pagt1);
 		
+		@SuppressWarnings("unused")
 		Pagamento pagt2 = new PagamentoBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("10/04/2020 00:00"), null);
 	//	ped2.setPagamento(pagt2);
 		

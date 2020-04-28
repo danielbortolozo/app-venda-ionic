@@ -88,7 +88,33 @@ public class DBService {
 		Produto p10 = new Produto(null, "Pendente", 180.00);
 		Produto p11 = new Produto(null, "Shampoo", 90.00);
 		
-		c1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		Produto p12 = new Produto(null, "Produto 12", 190.00);
+		Produto p13 = new Produto(null, "Produto 13", 40.00);
+		Produto p14 = new Produto(null, "Produto 14", 590.00);
+		Produto p15 = new Produto(null, "Produto 14", 590.00);
+		Produto p16 = new Produto(null, "Produto 14", 590.00);
+		Produto p17 = new Produto(null, "Produto 14", 590.00);
+		Produto p18 = new Produto(null, "Produto 14", 590.00);
+		Produto p19 = new Produto(null, "Produto 14", 590.00);
+		Produto p20 = new Produto(null, "Produto 14", 590.00);
+		Produto p21 = new Produto(null, "Produto 14", 590.00);
+		Produto p22 = new Produto(null, "Produto 14", 590.00);
+		Produto p23 = new Produto(null, "Produto 14", 590.00);
+		Produto p24 = new Produto(null, "Produto 14", 590.00);
+		Produto p25 = new Produto(null, "Produto 14", 590.00);
+		Produto p26 = new Produto(null, "Produto 14", 590.00);
+		Produto p27 = new Produto(null, "Produto 14", 590.00);
+		Produto p28 = new Produto(null, "Produto 14", 590.00);
+		Produto p29 = new Produto(null, "Produto 14", 590.00);
+		
+		
+		
+		
+		
+		
+		c1.getProdutos().addAll(Arrays.asList(p1,p2,p3,p12,p13,p14,p15,p16,p17,p18,p19,p20,p21,p22,p23,p24,p25,p26
+				,p27,p28,p29));
+		
 		c2.getProdutos().addAll(Arrays.asList(p2));
 		c2.getProdutos().addAll(Arrays.asList(p2, p4));
 		c3.getProdutos().addAll(Arrays.asList(p5, p6));
@@ -109,13 +135,24 @@ public class DBService {
 		p10.getCategorias().addAll(Arrays.asList(c6));
 		p11.getCategorias().addAll(Arrays.asList(c7));
 		
-		p1.getCategorias().addAll(Arrays.asList(c1));
-		p2.getCategorias().addAll(Arrays.asList(c1, c2));
-		p3.getCategorias().addAll(Arrays.asList(c1));
+		p12.getCategorias().add(c1);
+		p13.getCategorias().add(c1);
+		p14.getCategorias().add(c1);
+		p15.getCategorias().add(c1);
+		p16.getCategorias().add(c1);
+		p17.getCategorias().add(c1);
+		p18.getCategorias().add(c1);
+		p19.getCategorias().add(c1);
+		p20.getCategorias().add(c1);
+		p21.getCategorias().add(c1);
+		p22.getCategorias().add(c1);
+		p23.getCategorias().add(c1);
+		p24.getCategorias().add(c1);
 		
 		catRepos.saveAll(Arrays.asList(c1,c2, c3, c4, c5, c6, c7));
 		
-		prodRepos.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
+		prodRepos.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12,p13,p14,p15,p16,p17,p18,p19,
+				p20,p21,p22,p23,p24,p25,p26,p27,p28));
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "Sao Paulo");
 		
